@@ -19,23 +19,19 @@
         <% if book.favorited_by?(current_user) %>
             <td>
               <%= link_to book_favorites_path(book), method: :delete do %>
-               ♥<%= book.favorites.count %>いいね
+               ♥<%= book.favorites.count %>
               <% end %>
             </td>
             <% else %>
             <td>
               <%= link_to book_favorites_path(book), method: :post do %>
-               ♡<%= book.favorites.count %>いいね
+               ♡<%= book.favorites.count %>
                <% end %>
             </td>
         <% end %>
 
-        <td>コメント件数:<%= book.book_comments.count %></td>
-          <% book.book_comments.each do |book_comment| %>
-           <td><%= image_tag book_comment.user.get_profile_image(100, 100) %></td>
-           <%= book_comment.user.name %>
-           <%= book_comment.create_at.strftime('%Y/%m/%d') %><%= book_comment.comment %>
-          <% end %>
+        <td>コメント数:<%= book.book_comments.count %></td>
+         
           
       </tr>
     <% end %>
