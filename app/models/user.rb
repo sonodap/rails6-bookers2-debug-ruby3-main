@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :relationships, class_name:"Relationship", foreign_key:"_id", dependent: :destroy
 
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
