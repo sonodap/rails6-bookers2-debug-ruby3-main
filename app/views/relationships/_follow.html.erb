@@ -1,0 +1,13 @@
+<% if users.exists? %>
+  <% users.each do |user| %>    
+      <% if users.exists? %>
+       <% users.each do |user| %>
+        <tr>
+         <td>フォロー数: <%= user.followings.count %></td>
+         <td>フォローワー数: <%= user.followers.count %></td>
+        </tr>
+       <% end %>
+      <% end %>  
+      <% else %>
+         <p>ユーザはいません</p>
+<% end %>  
