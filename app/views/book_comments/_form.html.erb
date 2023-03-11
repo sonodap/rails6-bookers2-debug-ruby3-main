@@ -1,0 +1,10 @@
+<!--lokal: trueを削除-->
+<%= form_with(model:[book, book_comment], local: false) do |f| %>
+  <!--エラーメッセージ-->
+  <div id="comment_error">
+    <%= render 'layouts/errors', obj: book %>
+  </div>
+  <%= f.text_area :comment,class: "form-control", rows: '5' %>
+  <%= f.submit "送信" %>
+<% end %>
+

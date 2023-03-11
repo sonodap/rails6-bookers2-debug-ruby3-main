@@ -8,8 +8,8 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
-     <table class='table'>
-       <tr>
+      <table class='table'>
+        <tr>
           <td><%= link_to(@book.user) do %>
             <%= image_tag @book.user.get_profile_image(100, 100) %><br>
             <%= @book.user.name %>
@@ -21,40 +21,21 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
-
        <!--いいね数とコメント件数-->
           <td id= "favorite_buttons_<%= @book.id %>">
             <%= render "favorites/favorite", book: @book %>
           </td>
-          <td>コメント数:<%= @book.book_comments.count %></td>
-       </tr>
-
-       <!--コメントを投稿した人のnameとプロフィール写真とコメント内容、Destroy機能-->
-
-       <% @book.book_comments.each do |comment| %>
-        <tr>
-         <td>
-            <%= image_tag comment.user.get_profile_image(100, 100) %><br>
-            <%= comment.user.name %>
-         </td>
-         <td>
-           <%= comment.comment %>
-         </td>
-         <td>
-           <% if comment.user == current_user %>
-            <%= link_to"Destroy", book_book_comment_path(comment.book,comment), class:"btn btn-sm btn-danger", method: :delete %>
-           <% end %>
-         </td>
+          <td id= "count">
+            <%= render 'book_comments/comment_count', book: @book %>
+          </td>
         </tr>
-       <% end %>
-     </table>
-      <!--コメントの送信-->
-        <div>
-          <%= form_with model: [@book, @book_comment] do |f| %>
-             <%= f.text_area :comment,class: "form-control", rows: '5' %>
-             <%= f.submit "送信" %>
-          <% end %>
-       </div>
+      </table>
+       <!--コメントを投稿した人のnameとプロフィール写真とコメント内容、Destroy機能-->
+      <div id= "comments" >
+          <%= render 'book_comments/book_comments', book: @book %>
+      </div>
+        <!--コメントの送信-->
+        <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
     </div>
   </div>
 </div>
